@@ -1,0 +1,125 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Import axios
+import data from '../db.json';
+import './Register.css';
+import { Link } from 'react-router-dom';
+
+function Users() {
+    const [users, setUsers] = useState(data?.formData);
+    const [selectedRow, setSelectedRow] = useState(null);
+    const [showPopup, setShowPopup] = useState(false);
+    const [deletedItemId, setDeletedItemId] = useState(null);
+
+    useEffect(() => {
+        fetch('http://localhost:3001/formData')
+            .then(response => response.json())
+            .then(data => setUsers(data))
+            .catch(error => console.error('Error fetching users:', error));
+    }, []);
+
+    const [filterText, setFilterText] = useState('');
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+
+    const handleFilterChange = (e) => {
+        setFilterText(e.target.value);
+    };
+
+    const handleSort = (key) => {
+        let direction = 'asc';
+        if (sortConfig.key === key && sortConfig.direction === 'asc') {
+            direction = 'desc';
+        }
+        setSortConfig({ key, direction });
+    };
+
+    const handleRowClick = (user) => {
+        setSelectedRow(user);
+        setShowPopup(true);
+    };
+
+    const closePopup = () => {
+        setShowPopup(false);
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`http://localhost:3001/formData/${id}`);
+            setDeletedItemId(id);
+            setUsers(users.filter(item => item.id !== id)); // Remove the deleted item from the local state
+        } catch (error) {
+            console.error('Error deleting data:', error);
+        }
+    };
+
+    const filteredUsers = users.filter(user =>
+        user?.username?.toLowerCase().includes(filterText.toLowerCase()) ||
+        user?.email?.toLowerCase().includes(filterText.toLowerCase())
+    );
+
+    const sortedUsers = [...filteredUsers].sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === 'asc' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === 'asc' ? 1 : -1;
+        }
+        return 0;
+    });
+
+    return (
+        <div className='users-table'>
+            <h1>User List</h1>
+            <div className='user-filters'>
+                <Link to={'/'}>
+                    <button className='logout' type='button' >Logout</button>
+                </Link>
+                <input
+                    type="text"
+                    placeholder="Search by name or email"
+                    value={filterText}
+                    onChange={handleFilterChange}
+                />
+            </div>
+            <table className='users'>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Image</th>
+                        <th onClick={() => handleSort('username')}>Username (A-Z)</th>
+                        <th >DOB</th>
+                        <th onClick={() => handleSort('email')}>Email</th>
+                        <th>Phone</th>
+                        <th>Delete</th> {/* Added delete column */}
+                    </tr>
+                </thead>
+                <tbody>
+                    {sortedUsers?.map((user, index) => (
+                        <tr key={index}>
+                            <td onClick={() => handleRowClick(user)}>{index + 1}</td>
+                            <td><img src={user.imageSrc} alt="user" width={50} height={50} /></td>
+                            <td>{user.username}</td>
+                            <td>{user.dob}</td>
+                            <td>{user.email}</td>
+                            <td>{user.phone}</td>
+                            <td><button onClick={() => handleDelete(user.id)}>Delete</button></td> {/* Delete button */}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            {showPopup && selectedRow && (
+                <div className="popup">
+                    <div className="popup-content">
+                        <span className="close" onClick={closePopup}>×</span>
+                        <h2>Details</h2>
+                        <p>ID: {selectedRow.id}</p>
+                        <p>Name: {selectedRow.name}</p>
+                        {/* Add more details here */}
+                    </div>
+                </div>
+            )}
+            {deletedItemId && <p>Item with ID {deletedItemId} has been deleted.</p>}
+        </div>
+    );
+}
+
+export default Users;

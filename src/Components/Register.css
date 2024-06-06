@@ -1,0 +1,287 @@
+.login-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.login-container {
+    margin-top: 7rem;
+    padding: 40px 0px 40px 0px;
+    /* border: 2px solid black; */
+    border-radius: 40px;
+    width: 30%;
+    height: 350px;
+    backdrop-filter: blur(30px);
+    color: #fff;
+    box-shadow: 0px 1px 2px black;
+
+}
+
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container {
+    margin-top: 3rem;
+
+    backdrop-filter: blur(30px);
+    height: 720px;
+    box-shadow: 0px 1px 2px black;
+    border-radius: 40px;
+    color: #fff;
+    width: 60%;
+
+}
+
+.outer-box {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+}
+
+.login-form {
+    display: grid;
+    padding-top: 20px;
+    justify-content: center;
+}
+
+.first-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    /* border: 1px solid black; */
+}
+
+.registration-form {
+    display: grid;
+    width: 450px;
+}
+
+
+
+/* .profile-image{
+    object-fit: cover
+} */
+
+.main-heading {
+    font-size: 36px;
+    text-align: center;
+}
+
+.input-box {
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+    z-index: 999
+}
+
+.input-box input {
+    width: 85%;
+    height: 100%;
+    background: transparent;
+    outline: 2px solid;
+    border: none;
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+.input-box input::placeholder {
+    color: #fff;
+}
+
+.link p {
+    color: #fff;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.link p a:hover {
+    text-decoration: underline;
+}
+
+.submit-button {
+    border: none;
+    font-size: 16px;
+    border-radius: 40px;
+    color: #fff;
+    background-color: burlywood;
+    padding: 10px;
+    margin: 20px;
+    font-weight: bold;
+    z-index: 5;
+    cursor: pointer;
+    width: 85%;
+}
+
+.input-box .alert-box {
+    width: 250px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    z-index: 999;
+}
+
+.users-table {
+    /* background-color: white; */
+    backdrop-filter: blur(30px);
+    min-height: 100vh;
+    background-image: '';
+    color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+
+}
+
+.user-filters {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: self-end;
+    gap: 10px;
+    width: 300px;
+    align-items: end;
+    border-radius: 5px;
+    margin: 4px;
+    margin-right: 50px;
+}
+
+.users-table h1 {
+    align-self: center;
+}
+
+.user-filters input {
+    width: 100%;
+    font-size: 18px;
+    border-radius: 20px;
+    padding-left: 20px;
+    border: white;
+    height: 40px;
+    font-style: italic;
+
+}
+
+.logout {
+    /* padding: 10px; */
+    background-color: bisque;
+    align-self: flex-end;
+    border-radius: 20px;
+    width: 150px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.users-table .users {
+    border: 1px solid white;
+    padding: 30px;
+    width: fit-content;
+    box-shadow: 5px 5px;
+    align-self: center;
+
+}
+
+.users-table .users td {
+    padding: 20px 50px;
+    border: 1px solid whitesmoke;
+    /* box-shadow: 2px 2px; */
+}
+
+th {
+    cursor: pointer;
+}
+
+.popup {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: grey;
+    border: 1px solid #ccc;
+    /* border-radius: 5px; */
+    padding: 20px 50px;
+    z-index: 1000;
+    font-size: 16px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    width: 600px;
+    box-shadow: 0px 1px 2px black;
+    border-radius: 40px;
+
+
+    .popup-content .close {
+        cursor: pointer;
+        grid-column: 2;
+        justify-self: end;
+        font-size: 15px;
+        font-weight: bold;
+        color: rgb(255, 75, 75);
+        padding: 0px 8px 5px 8px ;
+        background-color: rgb(230, 230, 230);
+        border: 1px solid black;
+
+
+    }
+
+    input {
+        padding: 5px;
+        border-radius: 10px;
+        margin: 5px 15px;
+        font-size: 16px;
+
+
+    }
+
+    .user-details {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 50px;
+    }
+
+    .image {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+    }
+
+
+    .update-button {
+        border: none;
+        background-color: burlywood;
+        color: #fff;
+
+        border-radius: 40px;
+        cursor: pointer;
+        padding: 10px 50px;
+        font-weight: bold;
+
+        font-size: 16px;
+        grid-column: 2;
+        justify-self: center;
+
+
+    }
+
+    
+
+}
